@@ -15,7 +15,7 @@ export default function registerForm(req,res){
                 </div>
 
                 <div>
-                    <label for="code">Codigo:</label>
+                    <label for="code">Código:</label>
                     <input type="text" id="code" name="code" />
                 </div>
                 
