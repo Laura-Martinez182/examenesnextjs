@@ -1,16 +1,23 @@
+
+
+
 export default function registerForm(req,res){
+
+    let handleSubmit = async e =>{
+    }
+
     return (
         <div>
             <h1>Iniciar sesión</h1>
-            <form action="/send-data-here" method="post">
+            <form onSubmit={handleSubmit}>
                
                 <div>
-                    <label for="code">Código:</label>
+                    <label htmlFor="code">Código:</label>
                     <input type="text" id="code" name="code" />
                 </div>
                 
                 <div>  
-                    <label for="pw">Contraseña:</label>
+                    <label htmlFor="pw">Contraseña:</label>
                     <input type="password" id="pw" name="pw" />
                 </div>
 
