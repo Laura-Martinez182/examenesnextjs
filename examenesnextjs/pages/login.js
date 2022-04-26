@@ -1,7 +1,7 @@
 
 
 
-export default function registerForm(req,res){
+export default function login(req,res){
 
     let handleSubmit = async e =>{
     }
