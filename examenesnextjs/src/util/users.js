@@ -1,4 +1,4 @@
-let db = [
+let db1 = [
     {
         name: "name",
         lastname: "lastname",
@@ -8,4 +8,4 @@ let db = [
     }
 ]
 
-export default db;
+export default db1;
