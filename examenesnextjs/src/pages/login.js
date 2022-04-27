@@ -1,10 +1,59 @@
 import Header from '../components/Header'
 import styles from '../styles/Home.module.css'
 
-export default function login(req, res) {
+let user = {
+    code: "",
+    pssword: ""
+}
 
-    let handleSubmit = async e => {
+let handleChange = e => {
+    switch (e.target.name) {
+        
+        case "code": user.code = e.target.value; break;
+        case "pw": user.pssword = e.target.value;
     }
+}
+let handleSubmit = async e => {
+    e.preventDefault();
+    //let found= registrations.filter(x=> x.code==user.code && x.pssword==user.pssword);
+  /*
+    if(found){
+        window.location.assign("http://localhost:3000/api/registros")
+    }else{
+        window.location.assign("http://localhost:3000")
+    }
+    */
+    e.preventDefault();
+    let config = {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
+    }
+    
+    let r = await fetch("http://localhost:3000/api/validation", config)
+    console.log(r);
+    const result = await r.json()
+
+    
+    if(`${result.data}`=="found"){
+        window.location.assign("http://localhost:3000/api/registros")
+        //alert(`Is this your full name jajaja`)
+    }else{
+       window.location.assign("http://localhost:3000")
+       //alert(`Is this your full name jo`)
+    }
+    
+   //console.log(`${result.data}`);
+    //alert(`Is this your full name: ${result.data}`)
+
+}
+
+export default function login({registrations}) {
+
+    
     return (
         <div className={styles.container}>
             <Header title="Login"></Header>
@@ -18,11 +67,11 @@ export default function login(req, res) {
                     <form className='form  ' onSubmit={handleSubmit}>
                         <div className='form-group p-2'>
                             <label htmlFor="code">Código:</label>
-                            <input className='form-control' type="text" id="code" name="code" />
+                            <input className='form-control' type="text" id="code" name="code" onChange={handleChange}/>
                         </div>
                         <div className='form-group p-2'>
                             <label htmlFor="pw">Contraseña:</label>
-                            <input className='form-control' type="password" id="pw" name="pw" />
+                            <input className='form-control' type="password" id="pw" name="pw" onChange={handleChange}/>
                         </div>
                         <div className='form-group p-2'>
                             <button className="btn btn-primary" type='submit'>Ingresar</button>
@@ -32,5 +81,11 @@ export default function login(req, res) {
             </main>
         </div>
     )
+}
+
+login.getInitialProps = async ()=>{
+    const res = await fetch('http://localhost:3000/api/registros')
+    const regs = await res.json()
+    return {registrations: regs}
 }
 
