@@ -1,11 +1,11 @@
-import db1 from '../../util/database'
+import db1 from '../../util/users'
 
 export default async function handler(req,res){
     const {method , body} = req;
 
         var exit=false
         for (var i = 0; i < db.length && !exit; i++) {
-                if(db[i].code===body.code && db[i].pssword===body.pssword){
+                if(db1[i].code===body.code && db1[i].pssword===body.pssword){
                     exit=true
                 }
          }
