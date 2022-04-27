@@ -31,7 +31,7 @@ let handleSubmit = async e => {
         },
         body: JSON.stringify(data)
     }
-    let r = await fetch("http://localhost:3000/api/insert", config)
+    let r = await fetch("http://localhost:3000/api/insertUser", config)
     console.log(r);
 }
 

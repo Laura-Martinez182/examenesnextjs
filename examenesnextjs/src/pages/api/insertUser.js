@@ -1,10 +1,10 @@
-import db from '../../util/database'
+import db1 from '../../util/users'
 
 export default async function handler(req,res){
     const {method , body} = req;
         if (method === "POST"){
             console.log(req)
-            db.push({
+            db1.push({
                 name: body.name,
                 lastname: body.lastname,
                 code: body.code,
