@@ -39,11 +39,11 @@ let handleSubmit = async e => {
 
     
     if(`${result.data}`=="found"){
-        window.location.assign("http://localhost:3000/api/registros")
+        window.location.assign("http://localhost:3000/api/student/"+user.code)
         //alert(`Is this your full name jajaja`)
     }else{
-       window.location.assign("http://localhost:3000")
-       //alert(`Is this your full name jo`)
+       //window.location.assign("http://localhost:3000")
+       alert(`Codigo o contraseña incorrecta`)
     }
     
    //console.log(`${result.data}`);
@@ -84,7 +84,7 @@ export default function login({registrations}) {
 }
 
 login.getInitialProps = async ()=>{
-    const res = await fetch('http://localhost:3000/api/registros')
+    const res = await fetch('http://localhost:3000/api/regusers')
     const regs = await res.json()
     return {registrations: regs}
 }

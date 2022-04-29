@@ -1,11 +1,16 @@
 import db1 from '../../util/users'
 
 export default async function handler(req,res){
+    let response =await db1.query('SELECT * FROM PERSON')
+    console.log(response.rows)
+    
+    let db= response.rows;
+
     const {method , body} = req;
 
         var exit=false
         for (var i = 0; i < db.length && !exit; i++) {
-                if(db1[i].code===body.code && db1[i].pssword===body.pssword){
+                if(db[i].code===body.code && db[i].pssword===body.pssword){
                     exit=true
                 }
          }

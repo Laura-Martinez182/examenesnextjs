@@ -10,6 +10,7 @@ let data = {
     pssword: "",
     role: ""
 }
+let confpw=""
 
 let handleChange = e => {
     switch (e.target.name) {
@@ -17,22 +18,42 @@ let handleChange = e => {
         case "lastname": data.lastname = e.target.value; break;
         case "code": data.code = e.target.value; break;
         case "pw": data.pssword = e.target.value; break;
-        case "role": data.role = e.target.value
+        case "role": data.role = e.target.value; break;
+        case "confirmpw": confpw=e.target.value
     }
 }
 
 let handleSubmit = async e => {
     e.preventDefault();
-    let config = {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
+    console.log(confpw+"lol")
+    if(data.pssword===confpw){
+        
+        let config = {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }
+        let r = await fetch("http://localhost:3000/api/insertUser", config)
+        console.log(r);
+    
+    
+        const result = await r.json()
+        if(`${result.data}`=="inserted"){
+            alert(`Registro exitoso`)
+        }else{
+            alert(`El codigo ya existe`)
+        }
+    }else{
+        alert(`Las contraseñas no coinciden`)
+        console.log(confpw+"lol")
+        console.log(data.pssword+"lel")
+        console.log
     }
-    let r = await fetch("http://localhost:3000/api/insertUser", config)
-    console.log(r);
+    
+
 }
 
 export default function registerForm(req, res) {

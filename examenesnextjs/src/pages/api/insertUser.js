@@ -1,20 +1,38 @@
 import db1 from '../../util/users'
 
 export default async function handler(req,res){
+    let response =await db1.query('SELECT * FROM PERSON')
+    console.log(response.rows)
+    
+    let db= response.rows;
+
     const {method , body} = req;
         if (method === "POST"){
             console.log(req)
-            db1.push({
-                name: body.name,
-                lastname: body.lastname,
-                code: body.code,
-                pssword:body.pssword,
-                role: body.role
-            })
 
-            res.send({
-                response: "hello world"
-            });
+            var exit=false
+            for (var i = 0; i < db.length && !exit; i++) {
+                    if(db[i].code===body.code){
+                        exit=true
+                    }
+            }
+
+            if(!exit){
+                try {
+                    let response = await db1.query('INSERT INTO PERSON VALUES($1,$2,$3,$4,$5)',[body.name,body.lastname, body.code,body.pssword,body.role])
+    
+                res.send({
+                    response: "hello world"
+                });
+                } catch (error) {
+                    console.log(error)
+                }
+                res.status(200).json({ data: `inserted` })
+            }else{
+                res.status(200).json({ data: `not inserted` })
+            }
+
+            
         }else{
             res.status(404)
         }
