@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Header from '../components/Header'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
@@ -7,20 +8,33 @@ export default function examList({ names }) {
     return (
 
         <div className='w-50 m-auto mt-5'>
-            <h1 className='text-center'>Lista de deseos</h1>
-            <div className='list-group'>
+            <Header title="Exams List"></Header>
+            <h1 className={styles.description}>Lista de exámenes</h1>
+            <div class="row">
                 {names.map(e => (
-                    <a href="#" className="list-group-item list-group-item-action" aria-current="true">
-                        <div className="d-flex w-100 justify-content-between">
-                            <p className="mb-1">{e.title}</p>
-                            <p className="mb-1">{e.desc}</p>
-                        </div>
-                    </a>
+                    <div class="col-sm-6">
+                        <a href="#">
+                            <div class="card bg-light mb-3 w-auto">
+                                <div class="card text-center">
+                                    <div class="card-header">{e.codeid}</div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">{e.title}</h5>
+                                        <p class="card-text">{e.description}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
                 ))}
             </div>
         </div>
     )
 }
+
+
+
+
+
 
 examList.getInitialProps = async () => {
     const res = await fetch('http://localhost:3000/api/regexams')
