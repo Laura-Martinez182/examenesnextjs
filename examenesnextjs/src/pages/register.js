@@ -8,9 +8,9 @@ let data = {
     lastname: "",
     code: "",
     pssword: "",
+    confpw:"",
     role: ""
 }
-let confpw=""
 
 let handleChange = e => {
     switch (e.target.name) {
@@ -19,15 +19,13 @@ let handleChange = e => {
         case "code": data.code = e.target.value; break;
         case "pw": data.pssword = e.target.value; break;
         case "role": data.role = e.target.value; break;
-        case "confirmpw": confpw=e.target.value
+        case "confirmpw": data.confpw=e.target.value
     }
 }
 
 let handleSubmit = async e => {
     e.preventDefault();
-    console.log(confpw+"lol")
-    if(data.pssword===confpw){
-        
+   
         let config = {
             method: 'POST',
             headers: {
@@ -37,23 +35,19 @@ let handleSubmit = async e => {
             body: JSON.stringify(data)
         }
         let r = await fetch("http://localhost:3000/api/insertUser", config)
-        console.log(r);
-    
+       // console.log(r);
     
         const result = await r.json()
+
         if(`${result.data}`=="inserted"){
             alert(`Registro exitoso`)
-        }else{
+        }else if (`${result.data}`=="not inserted"){
             alert(`El codigo ya existe`)
+        }else{
+            alert(`Las contraseñas no coinciden`)
+            
         }
-    }else{
-        alert(`Las contraseñas no coinciden`)
-        console.log(confpw+"lol")
-        console.log(data.pssword+"lel")
-        console.log
-    }
     
-
 }
 
 export default function registerForm(req, res) {
@@ -70,27 +64,27 @@ export default function registerForm(req, res) {
                     <form className='form  ' onSubmit={handleSubmit}>
                         <div className='form-group p-2'>
                             <label htmlFor="first">Nombre:</label>
-                            <input className='form-control' type="text" id="name" name="name" onChange={handleChange} />
+                            <input className='form-control' type="text" id="name" name="name" onChange={handleChange} required/>
                         </div>
 
                         <div className='form-group p-2'>
                             <label htmlFor="lastname">Apellido:</label>
-                            <input className='form-control' type="text" id="lastname" name="lastname" onChange={handleChange} />
+                            <input className='form-control' type="text" id="lastname" name="lastname" onChange={handleChange} required/>
                         </div>
 
                         <div className='form-group p-2'>
                             <label htmlFor="code">Código:</label>
-                            <input className='form-control' type="text" id="code" name="code" onChange={handleChange} />
+                            <input className='form-control' type="text" id="code" name="code" onChange={handleChange} required/>
                         </div>
 
                         <div className='form-group p-2'>
                             <label htmlFor="pw">Contraseña:</label>
-                            <input className='form-control' type="password" id="pw" name="pw" onChange={handleChange} />
+                            <input className='form-control' type="password" id="pw" name="pw" onChange={handleChange} required/>
                         </div>
 
                         <div className='form-group p-2'>
                             <label htmlFor="confirmpw">Confirmar contraseña:</label>
-                            <input className='form-control' type="password" id="confirmpw" name="confirmpw" />
+                            <input className='form-control' type="password" id="confirmpw" name="confirmpw" onChange={handleChange} required/>
                         </div>
 
                         <div>
@@ -99,12 +93,12 @@ export default function registerForm(req, res) {
                             </div>
 
                             <div className="form-check form-check-inline">
-                                <input className="form-check-input" type="radio" id="student" name="role" value="student" onChange={handleChange} />
+                                <input className="form-check-input" type="radio" id="student" name="role" value="student" onChange={handleChange} required/>
                                 <label className="form-check-label" htmlFor="student">Estudiante</label>
                             </div>
 
                             <div className="form-check form-check-inline text-center">
-                                <input className="form-check-input" type="radio" id="teacher" name="role" value="teacher" onChange={handleChange} />
+                                <input className="form-check-input" type="radio" id="teacher" name="role" value="teacher" onChange={handleChange} required/>
                                 <label className="form-check-label" htmlFor="teacher">Profesor(a)</label>
                             </div>
                         </div>
@@ -112,7 +106,14 @@ export default function registerForm(req, res) {
                         <div className='form-group p-2'>
                             <button className="btn btn-primary" type='submit'>Registrarse</button>
                         </div>
+
+                        
                     </form>
+                    <div className='form-group p-2'>
+                        <a href="/" className={styles.bt}>
+                            Volver
+                        </a>
+                    </div>
                 </div>
             </main>
         </div>

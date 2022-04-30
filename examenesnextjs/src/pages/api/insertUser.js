@@ -8,8 +8,8 @@ export default async function handler(req,res){
 
     const {method , body} = req;
         if (method === "POST"){
-            console.log(req)
-
+            //console.log(req)
+            
             var exit=false
             for (var i = 0; i < db.length && !exit; i++) {
                     if(db[i].code===body.code){
@@ -18,18 +18,24 @@ export default async function handler(req,res){
             }
 
             if(!exit){
-                try {
-                    let response = await db1.query('INSERT INTO PERSON VALUES($1,$2,$3,$4,$5)',[body.name,body.lastname, body.code,body.pssword,body.role])
-    
-                res.send({
-                    response: "hello world"
-                });
-                } catch (error) {
-                    console.log(error)
+
+                if(body.pssword==body.confpw){
+                    try {
+                        db1.query('INSERT INTO PERSON VALUES($1,$2,$3,$4,$5)',[body.name,body.lastname, body.code,body.pssword,body.role])
+            
+                        
+                    } catch (error) {
+                        console.log(error)
+                    }
+                    res.status(200).json({ data: `inserted` })
+                   
+                }else{
+                    res.status(200).json({ data: `repeat` })
                 }
-                res.status(200).json({ data: `inserted` })
+
             }else{
                 res.status(200).json({ data: `not inserted` })
+
             }
 
             

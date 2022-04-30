@@ -67,16 +67,22 @@ export default function login({registrations}) {
                     <form className='form  ' onSubmit={handleSubmit}>
                         <div className='form-group p-2'>
                             <label htmlFor="code">Código:</label>
-                            <input className='form-control' type="text" id="code" name="code" onChange={handleChange}/>
+                            <input className='form-control' type="text" id="code" name="code" onChange={handleChange} required/>
                         </div>
                         <div className='form-group p-2'>
                             <label htmlFor="pw">Contraseña:</label>
-                            <input className='form-control' type="password" id="pw" name="pw" onChange={handleChange}/>
+                            <input className='form-control' type="password" id="pw" name="pw" onChange={handleChange} required/>
                         </div>
                         <div className='form-group p-2'>
                             <button className="btn btn-primary" type='submit'>Ingresar</button>
                         </div>
                     </form>
+                    <div className='form-group p-2'>
+                        <a href="/" className={styles.bt}>
+                            Volver
+                        </a>
+                    </div>
+
                 </div>
             </main>
         </div>
