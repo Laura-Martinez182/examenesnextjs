@@ -21,12 +21,21 @@ CREATE TABLE EXAM (
 
 CREATE TABLE QUESTION (
     QUESTIONID VARCHAR(10),
+    EXAMID VARCHAR(10),
     QUESTIONTEXT VARCHAR(60),
-    PERCENTAGE NUMERIC(),
+    PERCENTAGE INTEGER,
     OPTIONA TEXT,
     OPTIONB TEXT,
     OPTIONC TEXT,
     OPTIOND TEXT,
-    CORRECTOPTION CHAR(),
-    FOREIGN KEY (QUESTIONID) REFERENCES EXAM(CODEID)
+    CORRECTOPTION CHAR(1),
+    PRIMARY KEY(QUESTIONID),
+    FOREIGN KEY (EXAMID) REFERENCES EXAM(CODEID)
 );
+
+INSERT INTO EXAM VALUES('123','123','Examen IntroTic', 'Examen parcial 1');
+INSERT INTO QUESTION VALUES('1','123','Seleccione la opcion correcta','20','a','b','c','d','c');
+INSERT INTO QUESTION VALUES('2','123','Seleccione la opcion correcta','20','a','b','c','d','c');
+INSERT INTO QUESTION VALUES('3','123','Seleccione la opcion correcta','20','a','b','c','d','c');
+INSERT INTO QUESTION VALUES('4','123','Seleccione la opcion correcta','20','a','b','c','d','c');
+INSERT INTO QUESTION VALUES('5','123','Seleccione la opcion correcta','20','a','b','c','d','c');
