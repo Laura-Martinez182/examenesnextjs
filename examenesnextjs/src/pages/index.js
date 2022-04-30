@@ -11,7 +11,7 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Bienvenido 
+          Bienvenido
         </h1>
 
         <div className={styles.grid}>
@@ -28,4 +28,3 @@ export default function Home() {
     </div>
   )
 }
-
