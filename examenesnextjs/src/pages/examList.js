@@ -3,6 +3,8 @@ import Header from '../components/Header'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
+var code=null;
+
 export default function examList({ names }) {
 
     return (
@@ -13,7 +15,7 @@ export default function examList({ names }) {
             <div class="row">
                 {names.map(e => (
                     <div class="col-sm-6">
-                        <a href="#">
+                        <a href={'http://localhost:3000/exam/'+e.codeid}>
                             <div class="card bg-light mb-3 w-auto">
                                 <div class="card text-center">
                                     <div class="card-header">{e.codeid}</div>
@@ -30,11 +32,6 @@ export default function examList({ names }) {
         </div>
     )
 }
-
-
-
-
-
 
 examList.getInitialProps = async () => {
     const res = await fetch('http://localhost:3000/api/regexams')

@@ -358,10 +358,4 @@ export default function createExam(req, res) {
     )
 }
 
-function addQuestions() {
-    questions.push(question);
-    console.log(questions);
-    console.log(exam);
-}
-
 

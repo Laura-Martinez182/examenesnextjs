@@ -1,4 +1,4 @@
-import db1 from '../../util/users'
+import db1 from '../../util/database'
 
 export default async function (req,res){
     let response =await db1.query('SELECT * FROM PERSON')

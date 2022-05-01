@@ -1,0 +1,39 @@
+import { useRouter } from 'next/router'
+
+var examID=null;
+
+let code={
+    accCode:""
+}
+
+let handleChange = e => {
+    switch (e.target.name) {
+        case "codeacc": code.accCode = e.target.value; 
+    }
+}
+
+export default function hand(){
+    examID= useRouter().query.id
+    return (
+        <div className="card w-50 m-auto border-primary">
+            
+            <label htmlFor="codeacc">Ingrese el código de acceso:</label>
+            <input type="text" id="codeacc" name="codeacc" onChange={handleChange} />
+            <button className="btn btn-primary" type='submit' onSubmit={handleSubmit}> Validar </button>
+        </div>
+    )
+}
+
+
+let handleSubmit = async e => {
+    e.preventDefault();
+    let config = {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(code, examID)
+    }
+    let r = await fetch("http://localhost:3000/api/exam"+examID, config)
+}    
