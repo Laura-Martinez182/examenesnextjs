@@ -14,12 +14,13 @@ export default function examList({ names }) {
         <Header title="Exams List"></Header>
         <div>
             <a>Código del estudiante: {useRouter().query.id}</a>
+
         </div>
         <h1 className={styles.description}>Lista de exámenes</h1>
         <div class="row">
             {names.map(e => (
                 <div class="col-sm-6">
-                    <a href={'http://localhost:3000/exam/'+e.codeid}>
+                    <a href={'http://localhost:3000/exam/'+e.codeid }>
                         <div class="card bg-light mb-3 w-auto">
                             <div class="card text-center">
                                 <div class="card-header">{e.codeid}</div>
