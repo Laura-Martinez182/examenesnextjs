@@ -7,12 +7,14 @@ export default async function handler(req, res) {
 
     const { method, body } = req;
     if (method === "POST") {
-        //console.log(req)
+        console.log(req)
 
         var test = false
         var sum = 0
-        for (var i = 0; i < body.questions.length; i++) {
-            sum += parseFloat(body.questions[i].percentage)
+        var num =""
+        for (var i = 0; i < body[i].length; i++) {
+            num = body[i].percentage.toString()
+            sum += parseInt(num)
             console.log(sum)
             console.log("aaaaaaaaaaaa")
         }
@@ -21,16 +23,18 @@ export default async function handler(req, res) {
             test = true
         }
 
-        if (test===false) {
+       if (test===false) {
             try {
-                for (let i = 0; i < body.questions.length; i++) {
-                    console.log(body.questions[i].questiontext)
-                    db1.query('INSERT INTO QUESTION VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9)', [(i+"-"+body.codeid), body.codeid, body.questions[i].questiontext, body.questions[i].percentage, body.questions[i].optionA, body.questions[i].optionB, body.questions[i].optionC, body.questions[i].optionD, body.questions[i].correctOption])
+                console.log(body.questions)
+                for (let i = 0; i < body.length; i++) {
+                    console.log(body[i].questiontext)
+                    db1.query('INSERT INTO QUESTION VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9)', [(i+"-"+body[i].codeid), body[i].codeid, body[i].questiontext, body[i].percentage, body[i].optionA, body[i].optionB, body[i].optionC, body[i].optionD, body[i].correctOption])
                 }
+                res.status(200).json({ data: `inserted` })
             } catch (error) {
                 console.log(error)
             }
-            res.status(200).json({ data: `inserted` })
+            
         } else {
             res.status(200).json({ data: `not inserted` })
         }

@@ -171,6 +171,9 @@ let handleSubmit = async e => {
     const result1 = await r1.json()
     const result2 = await r2.json()
 
+    console.log(`${result1.data}`);
+    console.log(`${result2.data}`);
+
     if(`${result1.data}`=="inserted" && `${result2.data}`=="inserted"){
         alert(`El examen fue creado exitosamente`)
         window.location.assign("http://localhost:3000/teacher/"+teacher)

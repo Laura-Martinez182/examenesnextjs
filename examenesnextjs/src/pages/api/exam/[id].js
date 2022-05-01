@@ -26,7 +26,7 @@ export default async function handler(req, res) {
             try {
 
                 var questions = [];
-                for (var i = 0; i < dt.length && !stop; i++) {
+                for (var i = 0; i < dt.length; i++) {
                     if (dt[i].examid ===  req.query.id) {
                         questions[i] = dt[i]
                     }
