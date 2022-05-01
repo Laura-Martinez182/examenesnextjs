@@ -20,9 +20,7 @@ export default async function handler(req, res) {
         if (exit===false) {
             try {
                 db1.query('INSERT INTO EXAM VALUES($1,$2,$3,$4)', [body.codeid, body.codeacc, body.title, body.desc])
-                res.send({
-                    response: "hello world"
-                });
+                
             } catch (error) {
                 console.log(error)
             }
