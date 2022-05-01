@@ -1,7 +1,9 @@
-import Header from '../components/Header'
-import styles from '../styles/Home.module.css'
+import Header from '../../components/Header'
+import styles from '../../styles/Home.module.css'
+import {useRouter} from 'next/router'
 
 var questions = [];
+var teacher="";
 
 let exam = {
     codeid: "",
@@ -169,12 +171,12 @@ let handleSubmit = async e => {
     const result1 = await r1.json()
     const result2 = await r2.json()
 
-    console.log(result1.data);
-    console.log(result2.data);
+    console.log(`${result1.data}`);
+    console.log(`${result2.data}`);
 
     if(`${result1.data}`=="inserted" && `${result2.data}`=="inserted"){
         alert(`El examen fue creado exitosamente`)
-        window.location.assign("http://localhost:3000/user/")
+        window.location.assign("http://localhost:3000/teacher/"+teacher)
     }else if (`${result1.data}`=="not inserted"){
         alert(`El codigo único de identificación ingreso ya lo posee otro examen`)
     }else if (`${result2.data}`=="not inserted"){
@@ -184,7 +186,7 @@ let handleSubmit = async e => {
 }
 
 export default function createExam(req, res) {
-
+    teacher=useRouter().query.id;
     return (
         <div className={styles.container}>
             <Header title="Create exam"></Header>

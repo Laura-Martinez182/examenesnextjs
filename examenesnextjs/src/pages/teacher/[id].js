@@ -21,7 +21,7 @@ export default function teacher() {
                 </h1>
 
                 <div className={styles.grid}>
-                    <a href="/createExam" className={styles.card}>
+                    <a href={"/createExam/"+useRouter().query.id} className={styles.card}>
                         <h2>Crear examen</h2>
                     </a>
                 </div>
