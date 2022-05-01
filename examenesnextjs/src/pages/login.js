@@ -39,7 +39,7 @@ let handleSubmit = async e => {
 
     
     if(`${result.data}`=="found"){
-        window.location.assign("http://localhost:3000/api/student/"+user.code)
+        window.location.assign("http://localhost:3000/user/"+user.code)
         //alert(`Is this your full name jajaja`)
     }else{
        //window.location.assign("http://localhost:3000")

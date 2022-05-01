@@ -4,15 +4,15 @@ export default async function handler(req,res){
     let response =await db1.query('SELECT * FROM PERSON')
     console.log(response.rows)
     
-    let db1= response.rows;
+    let db= response.rows;
 
     const {method , body} = req;
         if (method === "POST"){
             //console.log(req)
             
             var exit=false
-            for (var i = 0; i < db1.length && !exit; i++) {
-                    if(db1[i].code===body.code){
+            for (var i = 0; i < db.length && !exit; i++) {
+                    if(db[i].code===body.code){
                         exit=true
                     }
             }
