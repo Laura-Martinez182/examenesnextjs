@@ -4,26 +4,25 @@ export default async function handler(req, res) {
     let response = await db1.query('SELECT * FROM EXAM')
     console.log(response.rows)
 
-    let response2 = await db1.query('SELECT * FROM QUESTION')
-    console.log(response2.rows)
 
 
     let db = response.rows;
-    let dt = response2.rows;
 
-    const { method, body } = req;
+    //const { method, body } = req;
     
         
-        console.log(req)
-
-        
-        var questions = [];
+        //console.log(req)
+        req.query.id;
+        console.log(req.query.id)
+        console.log("eeeeeeee")
+        var exam;
             try {
 
-                
-                for (var i = 0; i < dt.length; i++) {
-                    if (dt[i].examid ===  req.query.id) {
-                        questions.push(dt[i])
+                var exit=false
+                for (var i = 0; i < db.length && !exit; i++) {
+                    if (db[i].codeid ===  req.query.id) {
+                        exam=db[i]
+                        exit=true
                     }
                 }
                 /*
@@ -38,9 +37,9 @@ export default async function handler(req, res) {
             console.log("pasa")
            // let r = await fetch("http://localhost:3000/questionsList", questions)
            // res.json(r)
-           console.log(questions)
+           console.log(exam)
            console.log(req.query.id)
-           res.status(200).json(questions)
+           res.status(200).json(exam)
 
        
 
