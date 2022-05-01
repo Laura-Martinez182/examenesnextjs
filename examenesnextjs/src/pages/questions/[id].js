@@ -3,19 +3,19 @@ import Header from '../../components/Header'
 import styles from '../../styles/Home.module.css'
 import {useRouter} from 'next/router'
 
-let questions=[];
-let pageURL ="";
-export default  function questionsList() {
+//let questions=[];
+//let pageURL ="";
+export default  function questionsList({questions, examvalues}) {
     
-     pageURL = useRouter().query.id;
+     //pageURL = useRouter().query.id;
     
 
     return (
         <div className={styles.container}>
-            
+           
             <Header title="Question List"></Header>
             <main className={styles.main}>
-                <a onLoad={loadQuestions(pageURL)} ></a>
+                
                 <div className="card w-50 m-auto border-primary">
                     <div className="card text-center">
                         <h5 className="card-header">
@@ -24,21 +24,45 @@ export default  function questionsList() {
                     </div>
                 </div><br></br>
                 <div className="card w-50 m-auto border-primary" >
+
+                    <div className="card-header">{useRouter().query.id}</div>
+                    <div className="card-body">
+                        <h5 className="card-title">{examvalues.title}</h5>
+                        <p className="card-text">{examvalues.description}</p>
+                    </div>
+                 
                     {questions.map(e => (
                         <div className="card bg-light mb-3 w-auto">
                             <div className="card text-center">
-                                <div className="card-header">{e.codeid}</div>
+                                
                                 <div className="card-body">
-                                    <h5 className="card-title">{e.title}</h5>
-                                    <p className="card-text">{e.description}</p>
-                                </div>
-                                <div className="card-body">
-                                    <h5 className="card-title">{e.question}</h5>
-                                    <small className="card-text">{e.percentage}</small>
-                                    <input className="form-check-input" type="radio" id="optionA" >{e.optionA}</input>
-                                    <input className="form-check-input" type="radio" id="optionB" >{e.optionB}</input>
-                                    <input className="form-check-input" type="radio" id="optionC" >{e.optionC}</input>
-                                    <input className="form-check-input" type="radio" id="optionD" >{e.optionD}</input>
+                                    <h5 className="card-title">{e.questiontext}</h5>
+                                    <small className="card-text">Porcentaje: {e.percentage} %</small>
+                                    <div>
+                                        <input className="form-check-input" type="radio" id="optionA" name={"options"+e.questionid}/>
+                                        <label className="form-check-label" htmlFor="optionA">{e.optiona}</label>
+
+                                    </div>
+                                    
+                                    <div>
+                                        <input className="form-check-input" type="radio" id="optionB" name={"options"+e.questionid}/>
+                                        <label className="form-check-label" htmlFor="optionB">{e.optionb}</label>
+
+                                    </div>
+                                    
+                                    <div>
+                                        <input className="form-check-input" type="radio" id="optionC" name={"options"+e.questionid}/>
+                                        <label className="form-check-label" htmlFor="optionC">{e.optionc}</label>
+
+                                    </div>
+                                   
+                                    <div>
+                                        <input className="form-check-input" type="radio" id="optionD" name={"options"+e.questionid}/>
+                                        <label className="form-check-label" htmlFor="optionD">{e.optiond}</label>
+
+                                    </div>
+                                    
+                                    
                                 </div>
                             </div>
                         </div>
@@ -59,9 +83,22 @@ questionsList.getInitialProps = async () => {
 }
 */
 
+/*
 async function loadQuestions(qid) {
-   
+   if(qid){
     const res = await fetch('http://localhost:3000/api/questions/'+qid)
      questions = await res.json()
+   }
 }
+*/
 
+questionsList.getInitialProps = async (context) => {
+    var pageURL = context.asPath.split("/")[2];
+    console.log(pageURL+"aaa")
+    const res = await fetch("http://localhost:3000/api/questions/"+pageURL)
+    const exam = await res.json()
+
+    const res2 = await fetch("http://localhost:3000/api/examid/"+pageURL)
+    const exam2 = await res2.json()
+            return {questions: exam, examvalues:exam2 }
+}
