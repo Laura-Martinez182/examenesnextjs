@@ -41,7 +41,7 @@ let handleSubmit = async e => {
     let r = await fetch("http://localhost:3000/api/exam/"+examID, config)
     const result = await r.json()
     if(`${result.data}`=="correct"){
-        window.location.assign("http://localhost:3000/questions/"+examID)
+        window.location.assign("http://localhost:3000/questions/"+examID+"-0")
     }else{  
         alert(`Codigo de acceso incorrecto`)
     }

@@ -18,13 +18,20 @@ export default async function handler(req, res) {
         req.query.id;
         console.log(req.query.id)
         console.log("eeeeeeee")
-        var questions = [];
+        //var questions = [];
+        var exid=req.query.id.split("-")[0]
+        var qid=req.query.id.split("-")[1]
+        var question;
             try {
 
-                
-                for (var i = 0; i < dt.length; i++) {
-                    if (dt[i].examid ===  req.query.id) {
-                        questions.push(dt[i])
+                var exit= false
+                for (var i = 0; i < dt.length && !exit; i++) {
+                    if (dt[i].examid ===  exid ) {
+                        if(dt[i].questionid.charAt(0)==qid){
+                            question=dt[i]
+                            exit=true
+                        }
+                        
                     }
                 }
                 /*
@@ -36,12 +43,17 @@ export default async function handler(req, res) {
             } catch (error) {
                 console.log(error)
             }
-            console.log("pasa")
-           // let r = await fetch("http://localhost:3000/questionsList", questions)
-           // res.json(r)
-           console.log(questions)
-           console.log(req.query.id)
-           res.status(200).json(questions)
+
+            if(exit){
+                console.log("pasa")
+                
+                console.log(question)
+                console.log(req.query.id)
+                res.status(200).json(question)
+            }else{
+                console.log("no encuentra")
+            }
+            
 
        
 

@@ -3,12 +3,116 @@ import Header from '../../components/Header'
 import styles from '../../styles/Home.module.css'
 import {useRouter} from 'next/router'
 
-//let questions=[];
-//let pageURL ="";
-export default  function questionsList({questions, examvalues}) {
+let answerSelected={
+    ansSel:""
+}
+
+let urlPage=""
+let handleChange = e => {
+    switch (e.target.name) {
+        case "options": answerSelected.ansSel = e.target.value; break;
     
-     //pageURL = useRouter().query.id;
+    }
+}
+
+let handleSubmit = async e => {
+    e.preventDefault();
+   
+        let config = {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(answerSelected)
+        }
+        let r = await fetch("http://localhost:3000/api/saveQuestion/"+urlPage, config)
+       // console.log(r);
     
+
+       console.log(e)
+       console.log("iiiiiiiiiii")
+       /*
+        if (e.value == 'back') {
+            if(urlPage.split("-")[1]!="0"){
+             window.location.assign("http://localhost:3000/questions/"+(parseInt(urlPage.split("-")[1])-1))
+            }
+        } else if (e.value == 'next') {
+            if(urlPage.split("-")[1]!="4"){
+                window.location.assign("http://localhost:3000/questions/"+(parseInt(urlPage.split("-")[1])+1))
+            }else{
+                alert(`enviado`)
+            }
+        }
+        */
+
+        
+       
+        if(urlPage.split("-")[1]!="4"){
+            window.location.assign("http://localhost:3000/questions/"+urlPage.split("-")[0]+"-"+(parseInt(urlPage.split("-")[1])+1))
+        }else{
+            alert(`enviado`)
+        }
+        
+
+        
+       
+        
+    
+}
+
+let handleSubmit1 = async e => {
+    e.preventDefault();
+   
+        let config = {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(answerSelected)
+        }
+        let r = await fetch("http://localhost:3000/api/saveQuestion/"+urlPage, config)
+       // console.log(r);
+    
+
+       console.log(e)
+       console.log("ooooooo")
+       /*
+        if (e.value == 'back') {
+            if(urlPage.split("-")[1]!="0"){
+             window.location.assign("http://localhost:3000/questions/"+(parseInt(urlPage.split("-")[1])-1))
+            }
+        } else if (e.value == 'next') {
+            if(urlPage.split("-")[1]!="4"){
+                window.location.assign("http://localhost:3000/questions/"+(parseInt(urlPage.split("-")[1])+1))
+            }else{
+                alert(`enviado`)
+            }
+        }
+        */
+
+        
+       
+        if(urlPage.split("-")[1]!="0"){
+            window.location.assign("http://localhost:3000/questions/"+urlPage.split("-")[0]+"-"+(parseInt(urlPage.split("-")[1])-1))
+        }else{
+            alert(`No se puede devolver`)
+        }
+        
+
+        
+       
+        
+    
+}
+
+
+
+export default  function questionsList({questions, examvalues, aS}) {
+    
+    urlPage=useRouter().query.id
+    console.log(aS.ansSelected)
 
     return (
         <div className={styles.container}>
@@ -31,66 +135,58 @@ export default  function questionsList({questions, examvalues}) {
                         <p className="card-text">{examvalues.description}</p>
                     </div>
                  
-                    {questions.map(e => (
+                    
                         <div className="card bg-light mb-3 w-auto">
                             <div className="card text-center">
                                 
                                 <div className="card-body">
-                                    <h5 className="card-title">{e.questiontext}</h5>
-                                    <small className="card-text">Porcentaje: {e.percentage} %</small>
-                                    <div>
-                                        <input className="form-check-input" type="radio" id="optionA" name={"options"+e.questionid}/>
-                                        <label className="form-check-label" htmlFor="optionA">{e.optiona}</label>
+                                    <h5 className="card-title">{questions.questiontext}</h5>
+                                    <small className="card-text">Porcentaje: {questions.percentage} %</small>
 
-                                    </div>
-                                    
-                                    <div>
-                                        <input className="form-check-input" type="radio" id="optionB" name={"options"+e.questionid}/>
-                                        <label className="form-check-label" htmlFor="optionB">{e.optionb}</label>
+                                    <form className='form  ' onSubmit={handleSubmit}>
+                                        <div>
+                                            <input className="form-check-input" type="radio" id="optionA" name="options" onChange={handleChange} value="a" defaultChecked={aS.ansSelected==="a"} required/>
+                                            <label className="form-check-label" htmlFor="optionA">{questions.optiona}</label>
 
-                                    </div>
-                                    
-                                    <div>
-                                        <input className="form-check-input" type="radio" id="optionC" name={"options"+e.questionid}/>
-                                        <label className="form-check-label" htmlFor="optionC">{e.optionc}</label>
+                                        </div>
+                                        
+                                        <div>
+                                            <input className="form-check-input" type="radio" id="optionB" name="options" onChange={handleChange} value="b" defaultChecked={aS.ansSelected==="b"} required/>
+                                            <label className="form-check-label" htmlFor="optionB">{questions.optionb}</label>
 
-                                    </div>
-                                   
-                                    <div>
-                                        <input className="form-check-input" type="radio" id="optionD" name={"options"+e.questionid}/>
-                                        <label className="form-check-label" htmlFor="optionD">{e.optiond}</label>
+                                        </div>
+                                        
+                                        <div>
+                                            <input className="form-check-input" type="radio" id="optionC" name="options" onChange={handleChange} value="c" defaultChecked={aS.ansSelected==="c"} required/>
+                                            <label className="form-check-label" htmlFor="optionC">{questions.optionc}</label>
 
-                                    </div>
+                                        </div>
                                     
+                                        <div>
+                                            <input className="form-check-input" type="radio" id="optionD" name="options" onChange={handleChange} value="d" defaultChecked={aS.ansSelected==="d"} required/>
+                                            <label className="form-check-label" htmlFor="optionD">{questions.optiond}</label>
+
+                                        </div>
                                     
+                                        <div className='form-group p-2'>
+                                            <button id="bt1" className="btn btn-primary" type='submit' name="action" value="back" onClick={handleSubmit1}>Anterior</button>
+                                            <label>  &nbsp; </label>
+                                            <button id="bt2" className="btn btn-primary" type='submit' name="action" value="next">Siguiente</button>
+                                        </div>
+
+                                       
+                                    </form>
                                 </div>
                             </div>
                         </div>
-                    ))}
+                   
                 </div>
             </main>
         </div>
     )
 }
 
-/*
-questionsList.getInitialProps = async () => {
-    var pageURL = useRouter().query.id;
-    
-    const res = await fetch('http://localhost:3000/api/questions/'+pageURL)
-            const exam = await res.json()
-            return {questions: exam }
-}
-*/
 
-/*
-async function loadQuestions(qid) {
-   if(qid){
-    const res = await fetch('http://localhost:3000/api/questions/'+qid)
-     questions = await res.json()
-   }
-}
-*/
 
 questionsList.getInitialProps = async (context) => {
     var pageURL = context.asPath.split("/")[2];
@@ -98,7 +194,10 @@ questionsList.getInitialProps = async (context) => {
     const res = await fetch("http://localhost:3000/api/questions/"+pageURL)
     const exam = await res.json()
 
-    const res2 = await fetch("http://localhost:3000/api/examid/"+pageURL)
+    const res2 = await fetch("http://localhost:3000/api/examid/"+pageURL.split("-")[0])
     const exam2 = await res2.json()
-            return {questions: exam, examvalues:exam2 }
+
+    const res3 = await fetch("http://localhost:3000/api/selectedAnswer/"+pageURL)
+    const exam3 = await res3.json()
+            return {questions: exam, examvalues:exam2, aS:exam3 }
 }

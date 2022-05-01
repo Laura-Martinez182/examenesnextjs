@@ -7,7 +7,7 @@ export default function user() {
    userid=useRouter().query.id
     return(
         <div>
-        <a onLoad={goToPage(userid)}> {userid}</a>
+        <a onLoad={goToPage(userid)}> Loading...</a>
         </div>
     )
 }
