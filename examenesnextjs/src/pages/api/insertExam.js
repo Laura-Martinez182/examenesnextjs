@@ -26,7 +26,7 @@ export default async function handler(req, res) {
         var sum = 0
         for (var i = 0; i < body.questions.length; i++) {
             sum += body.questions[i].percentage
-            }
+        }
 
         if (sum > 100) {
             test = true
@@ -35,8 +35,9 @@ export default async function handler(req, res) {
         if (!exit && !test) {
             try {
                 let response = await db2.query('INSERT INTO EXAM VALUES($1,$2,$3,$4)', [body.codeid, body.codeacc, body.title, body.desc])
-                let response2 = await db2.query('INSERT INTO QUESTION VALUES($1,$2,$3,$4,$5,$6,$7,$8)', [body.questiontext, body.percentage, body.optionA, body.optionB, body.optionC, body.optionD, body.correctOption])
-
+                for (let i = 0; i < body.questions.length; i++) {
+                    let response2 = await db2.query('INSERT INTO QUESTION VALUES($1,$2,$3,$4,$5,$6,$7,$8)', [body.questions[i].questiontext, body.questions[i].percentage, body.questions[i].optionA, body.questions[i].optionB, body.questions[i].optionC, body.questions[i].optionD, body.questions[i].correctOption])
+                }
                 res.send({
                     response: "hello world"
                 });

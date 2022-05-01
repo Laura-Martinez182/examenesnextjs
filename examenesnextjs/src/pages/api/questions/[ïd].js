@@ -15,14 +15,8 @@ export default async function handler(req, res) {
     if (method === "POST") {
         console.log(req)
 
-        var exit = false
-        for (var i = 0; i < db.length && !exit; i++) {
-            if (db[i].codeacc === body.code.accCode) {
-                exit = true
-            }
-        }
-
-        if (!exit) {
+        
+        
             try {
 
                 var questions = [];
@@ -43,12 +37,9 @@ export default async function handler(req, res) {
             console.log("pasa")
            // let r = await fetch("http://localhost:3000/questionsList", questions)
            // res.json(r)
-           res.status(200).json({ data: `correct` })
+           res.status(200).json(questions)
 
-        } else {
-            res.status(200).json({ data: `incorrect access code` })
-            console.log("no pasa")
-        }
+       
 
     } else {
         res.status(404)

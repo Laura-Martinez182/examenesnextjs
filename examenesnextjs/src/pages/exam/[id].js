@@ -16,7 +16,6 @@ export default function hand(){
     examID= useRouter().query.id
     return (
         <div className="card w-50 m-auto border-primary">
-            
             <label htmlFor="codeacc">Ingrese el código de acceso:</label>
             <input type="text" id="codeacc" name="codeacc" onChange={handleChange} />
             <button className="btn btn-primary" type='submit' onSubmit={handleSubmit}> Validar </button>
@@ -33,7 +32,16 @@ let handleSubmit = async e => {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(code, examID)
+        body: JSON.stringify(code)
     }
+    console.log("pasa")
     let r = await fetch("http://localhost:3000/api/exam"+examID, config)
+    const result = await r.json()
+    if(`${result.data}`=="correct"){
+        window.location.assign("http://localhost:3000/questionsList#"+examID)
+    }else{  
+        alert(`Codigo de acceso incorrecto`)
+    }
+
+
 }    
