@@ -1,10 +1,10 @@
-import db2 from '../../util/database'
+import db1 from '../../../util/database'
 
 export default async function handler(req, res) {
-    let response = await db2.query('SELECT * FROM EXAM')
+    let response = await db1.query('SELECT * FROM EXAM')
     console.log(response.rows)
 
-    let response2 = await db2.query('SELECT * FROM QUESTION')
+    let response2 = await db1.query('SELECT * FROM QUESTION')
     console.log(response2.rows)
 
 
@@ -12,17 +12,18 @@ export default async function handler(req, res) {
     let dt = response2.rows;
 
     const { method, body } = req;
-    if (method === "POST") {
+    
+        
         console.log(req)
 
         
-        
+        var questions = [];
             try {
 
-                var questions = [];
-                for (var i = 0; i < dt.length && !stop; i++) {
+                
+                for (var i = 0; i < dt.length; i++) {
                     if (dt[i].examid ===  req.query.id) {
-                        questions[i] = dt[i]
+                        questions.push(dt[i])
                     }
                 }
                 /*
@@ -37,11 +38,11 @@ export default async function handler(req, res) {
             console.log("pasa")
            // let r = await fetch("http://localhost:3000/questionsList", questions)
            // res.json(r)
+           console.log(questions)
+           console.log(req.query.id)
            res.status(200).json(questions)
 
        
 
-    } else {
-        res.status(404)
-    }
+    
 }

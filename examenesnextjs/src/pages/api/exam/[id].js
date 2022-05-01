@@ -1,10 +1,10 @@
-import db2 from '../../util/database'
+import db1 from '../../../util/database'
 
 export default async function handler(req, res) {
-    let response = await db2.query('SELECT * FROM EXAM')
+    let response = await db1.query('SELECT * FROM EXAM')
     console.log(response.rows)
 
-    let response2 = await db2.query('SELECT * FROM QUESTION')
+    let response2 = await db1.query('SELECT * FROM QUESTION')
     console.log(response2.rows)
 
 
@@ -17,12 +17,12 @@ export default async function handler(req, res) {
 
         var exit = false
         for (var i = 0; i < db.length && !exit; i++) {
-            if (db[i].codeacc === body.code.accCode) {
+            if (db[i].codeid===req.query.id && db[i].codeacc === body.accCode) {
                 exit = true
             }
         }
 
-        if (!exit) {
+        if (exit) {
             try {
 
                 var questions = [];

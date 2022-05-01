@@ -1,10 +1,10 @@
-import db2 from '../../util/database'
+import db1 from '../../util/database'
 
 export default async function handler(req, res) {
-    let response = await db2.query('SELECT * FROM EXAM')
+    let response = await db1.query('SELECT * FROM EXAM')
     console.log(response.rows)
 
-    let response2 = await db2.query('SELECT * FROM QUESTION')
+    let response2 = await db1.query('SELECT * FROM QUESTION')
     console.log(response2.rows)
 
 
@@ -34,9 +34,9 @@ export default async function handler(req, res) {
 
         if (!exit && !test) {
             try {
-                let response = await db2.query('INSERT INTO EXAM VALUES($1,$2,$3,$4)', [body.codeid, body.codeacc, body.title, body.desc])
+                let response = await db1.query('INSERT INTO EXAM VALUES($1,$2,$3,$4)', [body.codeid, body.codeacc, body.title, body.desc])
                 for (let i = 0; i < body.questions.length; i++) {
-                    let response2 = await db2.query('INSERT INTO QUESTION VALUES($1,$2,$3,$4,$5,$6,$7,$8)', [body.questions[i].questiontext, body.questions[i].percentage, body.questions[i].optionA, body.questions[i].optionB, body.questions[i].optionC, body.questions[i].optionD, body.questions[i].correctOption])
+                    let response2 = await db1.query('INSERT INTO QUESTION VALUES($1,$2,$3,$4,$5,$6,$7,$8)', [body.questions[i].questiontext, body.questions[i].percentage, body.questions[i].optionA, body.questions[i].optionB, body.questions[i].optionC, body.questions[i].optionD, body.questions[i].correctOption])
                 }
                 res.send({
                     response: "hello world"
