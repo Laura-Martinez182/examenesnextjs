@@ -1,0 +1,45 @@
+import db1 from '../../util/database'
+
+export default async function handler(req, res) {
+
+    let response = await db1.query('SELECT * FROM QUESTION')
+    console.log(response.rows)
+
+    const { method, body } = req;
+    if (method === "POST") {
+        console.log(req)
+
+        var test = false
+        var sum = 0
+        for (var i = 0; i < body.questions.length; i++) {
+            sum += body.questions[i].percentage
+        }
+
+        if (sum > 100) {
+            test = true
+        }
+
+        if (test===false) {
+            try {
+                for (let i = 0; i < body.questions.length; i++) {
+                    console.log(body.questions[i].questiontext)
+                    db1.query('INSERT INTO QUESTION VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9)', [(i+"-"+body.codeid), body.codeid, body.questions[i].questiontext, body.questions[i].percentage, body.questions[i].optionA, body.questions[i].optionB, body.questions[i].optionC, body.questions[i].optionD, body.questions[i].correctOption])
+                }
+                res.send({
+                    response: "hello world"
+                });
+            } catch (error) {
+                console.log(error)
+            }
+            res.status(200).json({ data: `inserted` })
+        } else {
+            res.status(200).json({ data: `not inserted` })
+        }
+
+
+    } else {
+        res.status(404)
+    }
+
+
+}
