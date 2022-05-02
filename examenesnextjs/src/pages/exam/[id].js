@@ -1,19 +1,19 @@
 import { useRouter } from 'next/router'
 
-var examID=null;
+var examID = null;
 
-let code={
-    accCode:""
+let code = {
+    accCode: ""
 }
 
 let handleChange = e => {
     switch (e.target.name) {
-        case "codeacc": code.accCode = e.target.value; 
+        case "codeacc": code.accCode = e.target.value;
     }
 }
 
-export default function hand(){
-    examID= useRouter().query.id
+export default function hand() {
+    examID = useRouter().query.id
     return (
         <form className='form  ' onSubmit={handleSubmit}>
             <div className="card w-50 m-auto border-primary">
@@ -24,7 +24,6 @@ export default function hand(){
         </form>
     )
 }
-
 
 let handleSubmit = async e => {
     e.preventDefault();
@@ -37,14 +36,12 @@ let handleSubmit = async e => {
         body: JSON.stringify(code)
     }
     console.log("pasaa")
-    
-    let r = await fetch("http://localhost:3000/api/exam/"+examID, config)
+
+    let r = await fetch("http://localhost:3000/api/exam/" + examID, config)
     const result = await r.json()
-    if(`${result.data}`=="correct"){
-        window.location.assign("http://localhost:3000/questions/"+examID+"-0")
-    }else{  
+    if (`${result.data}` == "correct") {
+        window.location.assign("http://localhost:3000/questions/" + examID + "-0")
+    } else {
         alert(`Codigo de acceso incorrecto`)
     }
-
-
 }    

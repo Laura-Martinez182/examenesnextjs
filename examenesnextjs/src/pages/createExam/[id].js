@@ -1,9 +1,9 @@
 import Header from '../../components/Header'
 import styles from '../../styles/Home.module.css'
-import {useRouter} from 'next/router'
+import { useRouter } from 'next/router'
 
 var questions = [];
-var teacher="";
+var teacher = "";
 
 let exam = {
     codeid: "",
@@ -13,9 +13,9 @@ let exam = {
 }
 
 let question1 = {
-    codeid:"",
+    codeid: "",
     questiontext: "",
-    percentage: "",
+    percentage: "20",
     optionA: "",
     optionB: "",
     optionC: "",
@@ -24,9 +24,9 @@ let question1 = {
 }
 
 let question2 = {
-    codeid:"",
+    codeid: "",
     questiontext: "",
-    percentage: "",
+    percentage: "20",
     optionA: "",
     optionB: "",
     optionC: "",
@@ -35,9 +35,9 @@ let question2 = {
 }
 
 let question3 = {
-    codeid:"",
+    codeid: "",
     questiontext: "",
-    percentage: "",
+    percentage: "20",
     optionA: "",
     optionB: "",
     optionC: "",
@@ -46,9 +46,9 @@ let question3 = {
 }
 
 let question4 = {
-    codeid:"",
+    codeid: "",
     questiontext: "",
-    percentage: "",
+    percentage: "20",
     optionA: "",
     optionB: "",
     optionC: "",
@@ -57,9 +57,9 @@ let question4 = {
 }
 
 let question5 = {
-    codeid:"",
+    codeid: "",
     questiontext: "",
-    percentage: "",
+    percentage: "20",
     optionA: "",
     optionB: "",
     optionC: "",
@@ -71,7 +71,6 @@ let question5 = {
 let handleChangeQuestion1 = e => {
     switch (e.target.name) {
         case "questiontext": question1.questiontext = e.target.value; break;
-        case "percentage": question1.percentage = e.target.value; break;
         case "optionA1": question1.optionA = e.target.value; break;
         case "optionB1": question1.optionB = e.target.value; break;
         case "optionC1": question1.optionC = e.target.value; break;
@@ -83,7 +82,6 @@ let handleChangeQuestion1 = e => {
 let handleChangeQuestion2 = e => {
     switch (e.target.name) {
         case "questiontext": question2.questiontext = e.target.value; break;
-        case "percentage": question2.percentage = e.target.value; break;
         case "optionA2": question2.optionA = e.target.value; break;
         case "optionB2": question2.optionB = e.target.value; break;
         case "optionC2": question2.optionC = e.target.value; break;
@@ -95,7 +93,6 @@ let handleChangeQuestion2 = e => {
 let handleChangeQuestion3 = e => {
     switch (e.target.name) {
         case "questiontext": question3.questiontext = e.target.value; break;
-        case "percentage": question3.percentage = e.target.value; break;
         case "optionA3": question3.optionA = e.target.value; break;
         case "optionB3": question3.optionB = e.target.value; break;
         case "optionC3": question3.optionC = e.target.value; break;
@@ -107,7 +104,6 @@ let handleChangeQuestion3 = e => {
 let handleChangeQuestion4 = e => {
     switch (e.target.name) {
         case "questiontext": question4.questiontext = e.target.value; break;
-        case "percentage": question4.percentage = e.target.value; break;
         case "optionA4": question4.optionA = e.target.value; break;
         case "optionB4": question4.optionB = e.target.value; break;
         case "optionC4": question4.optionC = e.target.value; break;
@@ -119,7 +115,6 @@ let handleChangeQuestion4 = e => {
 let handleChangeQuestion5 = e => {
     switch (e.target.name) {
         case "questiontext": question5.questiontext = e.target.value; break;
-        case "percentage": question5.percentage = e.target.value; break;
         case "optionA5": question5.optionA = e.target.value; break;
         case "optionB5": question5.optionB = e.target.value; break;
         case "optionC5": question5.optionC = e.target.value; break;
@@ -167,26 +162,26 @@ let handleSubmit = async e => {
 
     let r1 = await fetch("http://localhost:3000/api/insertExam", config1)
     let r2 = await fetch("http://localhost:3000/api/insertQuestion", config2)
-    
+
     const result1 = await r1.json()
     const result2 = await r2.json()
 
     console.log(`${result1.data}`);
     console.log(`${result2.data}`);
 
-    if(`${result1.data}`=="inserted" && `${result2.data}`=="inserted"){
+    if (`${result1.data}` == "inserted" && `${result2.data}` == "inserted") {
         alert(`El examen fue creado exitosamente`)
-        window.location.assign("http://localhost:3000/teacher/"+teacher)
-    }else if (`${result1.data}`=="not inserted"){
+        window.location.assign("http://localhost:3000/teacher/" + teacher)
+    } else if (`${result1.data}` == "not inserted") {
         alert(`El codigo único de identificación ingreso ya lo posee otro examen`)
-    }else if (`${result2.data}`=="not inserted"){
+    } else if (`${result2.data}` == "not inserted") {
         alert(`La suma de los porcentajes de todas las preguntas no suma 100`)
-        
+
     }
 }
 
 export default function createExam(req, res) {
-    teacher=useRouter().query.id;
+    teacher = useRouter().query.id;
     return (
         <div className={styles.container}>
             <Header title="Create exam"></Header>
@@ -222,10 +217,7 @@ export default function createExam(req, res) {
                                 <label htmlFor="questiontext">Ingrese la pregunta:</label>
                                 <input className='form-control' type="text" id="questiontext" name="questiontext" onChange={handleChangeQuestion1} />
                             </div>
-                            <div className='form-group p-2'>
-                                <label htmlFor="percentage">Porcentaje de esta pregunta sobre la nota final del examen:</label>
-                                <input className='form-control' type="text" id="percentage" name="percentage" onChange={handleChangeQuestion1} />
-                            </div>
+
                             <div className='form-group p-2'>
                                 <label htmlFor="optionA1">Opción A:</label>
                                 <input className='form-control' type="text" id="optionA1" name="optionA1" onChange={handleChangeQuestion1} />
@@ -248,22 +240,22 @@ export default function createExam(req, res) {
                                 </div>
 
                                 <div className="form-check form-check-inline">
-                                    <input className="form-check-input" type="radio" id="optionAR1" name="correctOption1" value="A" onChange={handleChangeQuestion1} />
+                                    <input className="form-check-input" type="radio" id="optionAR1" name="correctOption1" value="a" onChange={handleChangeQuestion1} />
                                     <label className="form-check-label" htmlFor="optionAR1">Opción A</label>
                                 </div>
 
                                 <div className="form-check form-check-inline text-center">
-                                    <input className="form-check-input" type="radio" id="optionBR1" name="correctOption1" value="B" onChange={handleChangeQuestion1} />
+                                    <input className="form-check-input" type="radio" id="optionBR1" name="correctOption1" value="b" onChange={handleChangeQuestion1} />
                                     <label className="form-check-label" htmlFor="optionBR1">Opción B</label>
                                 </div>
 
                                 <div className="form-check form-check-inline text-center">
-                                    <input className="form-check-input" type="radio" id="optionCR1" name="correctOption1" value="C" onChange={handleChangeQuestion1} />
+                                    <input className="form-check-input" type="radio" id="optionCR1" name="correctOption1" value="c" onChange={handleChangeQuestion1} />
                                     <label className="form-check-label" htmlFor="optionCR1">Opción C</label>
                                 </div>
 
                                 <div className="form-check form-check-inline text-center">
-                                    <input className="form-check-input" type="radio" id="optionDR1" name="correctOption1" value="D" onChange={handleChangeQuestion1} />
+                                    <input className="form-check-input" type="radio" id="optionDR1" name="correctOption1" value="d" onChange={handleChangeQuestion1} />
                                     <label className="form-check-label" htmlFor="optionDR1">Opción D</label>
                                 </div>
                             </div>
@@ -274,10 +266,7 @@ export default function createExam(req, res) {
                                 <label htmlFor="questiontext">Ingrese la pregunta:</label>
                                 <input className='form-control' type="text" id="questiontext" name="questiontext" onChange={handleChangeQuestion2} />
                             </div>
-                            <div className='form-group p-2'>
-                                <label htmlFor="percentage">Porcentaje de esta pregunta sobre la nota final del examen:</label>
-                                <input className='form-control' type="text" id="percentage" name="percentage" onChange={handleChangeQuestion2} />
-                            </div>
+
                             <div className='form-group p-2'>
                                 <label htmlFor="optionA2">Opción A:</label>
                                 <input className='form-control' type="text" id="optionA2" name="optionA2" onChange={handleChangeQuestion2} />
@@ -300,22 +289,22 @@ export default function createExam(req, res) {
                                 </div>
 
                                 <div className="form-check form-check-inline">
-                                    <input className="form-check-input" type="radio" id="optionAR2" name="correctOption2" value="A" onChange={handleChangeQuestion2} />
+                                    <input className="form-check-input" type="radio" id="optionAR2" name="correctOption2" value="a" onChange={handleChangeQuestion2} />
                                     <label className="form-check-label" htmlFor="optionAR2">Opción A</label>
                                 </div>
 
                                 <div className="form-check form-check-inline text-center">
-                                    <input className="form-check-input" type="radio" id="optionBR2" name="correctOption2" value="B" onChange={handleChangeQuestion2} />
+                                    <input className="form-check-input" type="radio" id="optionBR2" name="correctOption2" value="b" onChange={handleChangeQuestion2} />
                                     <label className="form-check-label" htmlFor="optionBR2">Opción B</label>
                                 </div>
 
                                 <div className="form-check form-check-inline text-center">
-                                    <input className="form-check-input" type="radio" id="optionCR2" name="correctOption2" value="C" onChange={handleChangeQuestion2} />
+                                    <input className="form-check-input" type="radio" id="optionCR2" name="correctOption2" value="c" onChange={handleChangeQuestion2} />
                                     <label className="form-check-label" htmlFor="optionCR2">Opción C</label>
                                 </div>
 
                                 <div className="form-check form-check-inline text-center">
-                                    <input className="form-check-input" type="radio" id="optionDR2" name="correctOption2" value="D" onChange={handleChangeQuestion2} />
+                                    <input className="form-check-input" type="radio" id="optionDR2" name="correctOption2" value="d" onChange={handleChangeQuestion2} />
                                     <label className="form-check-label" htmlFor="optionDR2">Opción D</label>
                                 </div>
                             </div>
@@ -326,10 +315,7 @@ export default function createExam(req, res) {
                                 <label htmlFor="questiontext">Ingrese la pregunta:</label>
                                 <input className='form-control' type="text" id="questiontext" name="questiontext" onChange={handleChangeQuestion3} />
                             </div>
-                            <div className='form-group p-2'>
-                                <label htmlFor="percentage">Porcentaje de esta pregunta sobre la nota final del examen:</label>
-                                <input className='form-control' type="text" id="percentage" name="percentage" onChange={handleChangeQuestion3} />
-                            </div>
+
                             <div className='form-group p-2'>
                                 <label htmlFor="optionA3">Opción A:</label>
                                 <input className='form-control' type="text" id="optionA3" name="optionA3" onChange={handleChangeQuestion3} />
@@ -352,22 +338,22 @@ export default function createExam(req, res) {
                                 </div>
 
                                 <div className="form-check form-check-inline">
-                                    <input className="form-check-input" type="radio" id="optionAR3" name="correctOption3" value="A" onChange={handleChangeQuestion3} />
+                                    <input className="form-check-input" type="radio" id="optionAR3" name="correctOption3" value="a" onChange={handleChangeQuestion3} />
                                     <label className="form-check-label" htmlFor="optionAR3">Opción A</label>
                                 </div>
 
                                 <div className="form-check form-check-inline text-center">
-                                    <input className="form-check-input" type="radio" id="optionBR3" name="correctOption3" value="B" onChange={handleChangeQuestion3} />
+                                    <input className="form-check-input" type="radio" id="optionBR3" name="correctOption3" value="b" onChange={handleChangeQuestion3} />
                                     <label className="form-check-label" htmlFor="optionBR3">Opción B</label>
                                 </div>
 
                                 <div className="form-check form-check-inline text-center">
-                                    <input className="form-check-input" type="radio" id="optionCR3" name="correctOption3" value="C" onChange={handleChangeQuestion3} />
+                                    <input className="form-check-input" type="radio" id="optionCR3" name="correctOption3" value="c" onChange={handleChangeQuestion3} />
                                     <label className="form-check-label" htmlFor="optionCR3">Opción C</label>
                                 </div>
 
                                 <div className="form-check form-check-inline text-center">
-                                    <input className="form-check-input" type="radio" id="optionDR3" name="correctOption3" value="D" onChange={handleChangeQuestion3} />
+                                    <input className="form-check-input" type="radio" id="optionDR3" name="correctOption3" value="d" onChange={handleChangeQuestion3} />
                                     <label className="form-check-label" htmlFor="optionDR3">Opción D</label>
                                 </div>
                             </div>
@@ -378,10 +364,7 @@ export default function createExam(req, res) {
                                 <label htmlFor="questiontext">Ingrese la pregunta:</label>
                                 <input className='form-control' type="text" id="questiontext" name="questiontext" onChange={handleChangeQuestion4} />
                             </div>
-                            <div className='form-group p-2'>
-                                <label htmlFor="percentage">Porcentaje de esta pregunta sobre la nota final del examen:</label>
-                                <input className='form-control' type="text" id="percentage" name="percentage" onChange={handleChangeQuestion4} />
-                            </div>
+
                             <div className='form-group p-2'>
                                 <label htmlFor="optionA4">Opción A:</label>
                                 <input className='form-control' type="text" id="optionA4" name="optionA4" onChange={handleChangeQuestion4} />
@@ -404,22 +387,22 @@ export default function createExam(req, res) {
                                 </div>
 
                                 <div className="form-check form-check-inline">
-                                    <input className="form-check-input" type="radio" id="optionAR4" name="correctOption4" value="A" onChange={handleChangeQuestion4} />
+                                    <input className="form-check-input" type="radio" id="optionAR4" name="correctOption4" value="a" onChange={handleChangeQuestion4} />
                                     <label className="form-check-label" htmlFor="optionAR4">Opción A</label>
                                 </div>
 
                                 <div className="form-check form-check-inline text-center">
-                                    <input className="form-check-input" type="radio" id="optionBR4" name="correctOption4" value="B" onChange={handleChangeQuestion4} />
+                                    <input className="form-check-input" type="radio" id="optionBR4" name="correctOption4" value="b" onChange={handleChangeQuestion4} />
                                     <label className="form-check-label" htmlFor="optionBR4">Opción B</label>
                                 </div>
 
                                 <div className="form-check form-check-inline text-center">
-                                    <input className="form-check-input" type="radio" id="optionCR4" name="correctOption4" value="C" onChange={handleChangeQuestion4} />
+                                    <input className="form-check-input" type="radio" id="optionCR4" name="correctOption4" value="c" onChange={handleChangeQuestion4} />
                                     <label className="form-check-label" htmlFor="optionCR4">Opción C</label>
                                 </div>
 
                                 <div className="form-check form-check-inline text-center">
-                                    <input className="form-check-input" type="radio" id="optionDR4" name="correctOption4" value="D" onChange={handleChangeQuestion4} />
+                                    <input className="form-check-input" type="radio" id="optionDR4" name="correctOption4" value="d" onChange={handleChangeQuestion4} />
                                     <label className="form-check-label" htmlFor="optionDR4">Opción D</label>
                                 </div>
                             </div>
@@ -430,10 +413,7 @@ export default function createExam(req, res) {
                                 <label htmlFor="questiontext">Ingrese la pregunta:</label>
                                 <input className='form-control' type="text" id="questiontext" name="questiontext" onChange={handleChangeQuestion5} />
                             </div>
-                            <div className='form-group p-2'>
-                                <label htmlFor="percentage">Porcentaje de esta pregunta sobre la nota final del examen:</label>
-                                <input className='form-control' type="text" id="percentage" name="percentage" onChange={handleChangeQuestion5} />
-                            </div>
+
                             <div className='form-group p-2'>
                                 <label htmlFor="optionA5">Opción A:</label>
                                 <input className='form-control' type="text" id="optionA5" name="optionA5" onChange={handleChangeQuestion5} />
@@ -456,22 +436,22 @@ export default function createExam(req, res) {
                                 </div>
 
                                 <div className="form-check form-check-inline">
-                                    <input className="form-check-input" type="radio" id="optionAR5" name="correctOption5" value="A" onChange={handleChangeQuestion5} />
+                                    <input className="form-check-input" type="radio" id="optionAR5" name="correctOption5" value="a" onChange={handleChangeQuestion5} />
                                     <label className="form-check-label" htmlFor="optionAR5">Opción A</label>
                                 </div>
 
                                 <div className="form-check form-check-inline text-center">
-                                    <input className="form-check-input" type="radio" id="optionBR5" name="correctOption5" value="B" onChange={handleChangeQuestion5} />
+                                    <input className="form-check-input" type="radio" id="optionBR5" name="correctOption5" value="b" onChange={handleChangeQuestion5} />
                                     <label className="form-check-label" htmlFor="optionBR5">Opción B</label>
                                 </div>
 
                                 <div className="form-check form-check-inline text-center">
-                                    <input className="form-check-input" type="radio" id="optionCR5" name="correctOption5" value="C" onChange={handleChangeQuestion5} />
+                                    <input className="form-check-input" type="radio" id="optionCR5" name="correctOption5" value="c" onChange={handleChangeQuestion5} />
                                     <label className="form-check-label" htmlFor="optionCR5">Opción C</label>
                                 </div>
 
                                 <div className="form-check form-check-inline text-center">
-                                    <input className="form-check-input" type="radio" id="optionDR5" name="correctOption5" value="D" onChange={handleChangeQuestion5} />
+                                    <input className="form-check-input" type="radio" id="optionDR5" name="correctOption5" value="d" onChange={handleChangeQuestion5} />
                                     <label className="form-check-label" htmlFor="optionDR5">Opción D</label>
                                 </div>
                             </div>

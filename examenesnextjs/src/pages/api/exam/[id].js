@@ -17,7 +17,7 @@ export default async function handler(req, res) {
 
         var exit = false
         for (var i = 0; i < db.length && !exit; i++) {
-            if (db[i].codeid===req.query.id.split("-")[1] && db[i].codeacc === body.accCode) {
+            if (db[i].codeid === req.query.id.split("-")[1] && db[i].codeacc === body.accCode) {
                 exit = true
             }
         }
@@ -27,23 +27,16 @@ export default async function handler(req, res) {
 
                 var questions = [];
                 for (var i = 0; i < dt.length; i++) {
-                    if (dt[i].examid ===  req.query.id.split("-")[1]) {
+                    if (dt[i].examid === req.query.id.split("-")[1]) {
                         questions[i] = dt[i]
                     }
                 }
-                /*
-                res.send({
-                    response: "hello world"
-                });
-                */
 
             } catch (error) {
                 console.log(error)
             }
             console.log("pasa")
-           // let r = await fetch("http://localhost:3000/questionsList", questions)
-           // res.json(r)
-           res.status(200).json({ data: `correct` })
+            res.status(200).json({ data: `correct` })
 
         } else {
             res.status(200).json({ data: `incorrect access code` })

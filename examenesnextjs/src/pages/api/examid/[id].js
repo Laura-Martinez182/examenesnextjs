@@ -7,11 +7,6 @@ export default async function handler(req, res) {
 
 
     let db = response.rows;
-
-    //const { method, body } = req;
-    
-        
-        //console.log(req)
         req.query.id;
         console.log(req.query.id)
         console.log("eeeeeeee")
@@ -25,23 +20,12 @@ export default async function handler(req, res) {
                         exit=true
                     }
                 }
-                /*
-                res.send({
-                    response: "hello world"
-                });
-                */
 
             } catch (error) {
                 console.log(error)
             }
             console.log("pasa")
-           // let r = await fetch("http://localhost:3000/questionsList", questions)
-           // res.json(r)
            console.log(exam)
            console.log(req.query.id)
            res.status(200).json(exam)
-
-       
-
-    
 }

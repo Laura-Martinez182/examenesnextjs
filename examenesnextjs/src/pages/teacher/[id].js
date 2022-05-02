@@ -1,12 +1,12 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../../styles/Home.module.css'
-import {useRouter} from 'next/router'
+import { useRouter } from 'next/router'
 
 export default function teacher() {
 
     return (
-        
+
         <div className={styles.container}>
             <Head>
                 <link rel="icon" href="/favicon.ico" />
@@ -21,7 +21,7 @@ export default function teacher() {
                 </h1>
 
                 <div className={styles.grid}>
-                    <a href={"/createExam/"+useRouter().query.id} className={styles.card}>
+                    <a href={"/createExam/" + useRouter().query.id} className={styles.card}>
                         <h2>Crear examen</h2>
                     </a>
                 </div>

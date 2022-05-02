@@ -33,15 +33,11 @@ export default async function handler(req, res) {
                             }
                         }
                     }
-                }
-                    
+                }        
             }
-            
             
 
             console.log(grade)
-            res.status(200).json({ data: grade })
-            
-        
+            res.status(200).json({ data: grade })    
 
 }
