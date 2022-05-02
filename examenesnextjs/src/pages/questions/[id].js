@@ -51,7 +51,11 @@ let handleSubmit = async e => {
         if(urlPage.split("-")[1]!="4"){
             window.location.assign("http://localhost:3000/questions/"+urlPage.split("-")[0]+"-"+(parseInt(urlPage.split("-")[1])+1))
         }else{
-            alert(`enviado`)
+
+            let r = await fetch("http://localhost:3000/api/calculateGrade/"+urlPage)
+            const result = await r.json()
+
+            alert(`Nota: ${result.data}`)
         }
         
 

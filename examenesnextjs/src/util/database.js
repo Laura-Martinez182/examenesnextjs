@@ -5,7 +5,7 @@ if(!db1){
     db1= new Pool({
         host: "localhost",
         user: "postgres",
-        password: "kelo111213",
+        password: "basepassword",
         database: "postgres",
         port: "5432"    
     })
