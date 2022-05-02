@@ -20,7 +20,7 @@ export default async function handler(req, res) {
         console.log(answ)
     } else {
 
-        res.status(200).json({ ansSelected: `e` })
+        res.status(200).json({ ansselected: `e` })
         console.log("not worked")
     }
 }

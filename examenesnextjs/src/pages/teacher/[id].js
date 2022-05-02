@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Image from 'next/image'
+import Header from '../../components/Header'
 import styles from '../../styles/Home.module.css'
 import { useRouter } from 'next/router'
 
@@ -7,14 +7,21 @@ export default function teacher() {
 
     return (
 
-        <div className={styles.container}>
+        <div className='w-50 m-auto mt-5'>
             <Head>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <div>
-                <a>Código del docente: {useRouter().query.id}</a>
+            <Header title="Teacher menu"></Header>
+            <div className={styles.row}>
+                <div>
+                    <a>Código del docente: {useRouter().query.id}</a>
+                </div>
+                <div className='form-group p-2'>
+                    <a href="/" className={styles.bt}>
+                        Cerrar sesión
+                    </a>
+                </div>
             </div>
-
             <main className={styles.main}>
                 <h1 className={styles.title}>
                     ¿Qué deseas hacer?

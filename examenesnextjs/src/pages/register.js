@@ -1,14 +1,15 @@
 import Header from '../components/Header'
 import styles from '../styles/Home.module.css'
+import Head from 'next/head'
 
 
-// Get data from the form.
+
 let data = {
     name: "",
     lastname: "",
     code: "",
     pssword: "",
-    confpw:"",
+    confpw: "",
     role: ""
 }
 
@@ -19,40 +20,43 @@ let handleChange = e => {
         case "code": data.code = e.target.value; break;
         case "pw": data.pssword = e.target.value; break;
         case "role": data.role = e.target.value; break;
-        case "confirmpw": data.confpw=e.target.value
+        case "confirmpw": data.confpw = e.target.value
     }
 }
 
 let handleSubmit = async e => {
     e.preventDefault();
-   
-        let config = {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        }
-        let r = await fetch("http://localhost:3000/api/insertUser", config)
-       // console.log(r);
-    
-        const result = await r.json()
 
-        if(`${result.data}`=="inserted"){
-            alert(`Registro exitoso`)
-        }else if (`${result.data}`=="not inserted"){
-            alert(`El codigo ya existe`)
-        }else{
-            alert(`Las contraseñas no coinciden`)
-            
-        }
-    
+    let config = {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }
+    let r = await fetch("http://localhost:3000/api/insertUser", config)
+    // console.log(r);
+
+    const result = await r.json()
+
+    if (`${result.data}` == "inserted") {
+        alert(`Registro exitoso`)
+    } else if (`${result.data}` == "not inserted") {
+        alert(`El codigo ya existe`)
+    } else {
+        alert(`Las contraseñas no coinciden`)
+
+    }
+
 }
 
 export default function registerForm(req, res) {
     return (
         <div className={styles.container}>
+            <Head>
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
             <Header title="Registro"></Header>
             <main className={styles.main}>
                 <div className="card w-50 m-auto border-primary">
@@ -64,27 +68,27 @@ export default function registerForm(req, res) {
                     <form className='form  ' onSubmit={handleSubmit}>
                         <div className='form-group p-2'>
                             <label htmlFor="first">Nombre:</label>
-                            <input className='form-control' type="text" id="name" name="name" onChange={handleChange} required/>
+                            <input className='form-control' type="text" id="name" name="name" onChange={handleChange} required />
                         </div>
 
                         <div className='form-group p-2'>
                             <label htmlFor="lastname">Apellido:</label>
-                            <input className='form-control' type="text" id="lastname" name="lastname" onChange={handleChange} required/>
+                            <input className='form-control' type="text" id="lastname" name="lastname" onChange={handleChange} required />
                         </div>
 
                         <div className='form-group p-2'>
                             <label htmlFor="code">Código:</label>
-                            <input className='form-control' type="text" id="code" name="code" onChange={handleChange} required/>
+                            <input className='form-control' type="text" id="code" name="code" onChange={handleChange} required />
                         </div>
 
                         <div className='form-group p-2'>
                             <label htmlFor="pw">Contraseña:</label>
-                            <input className='form-control' type="password" id="pw" name="pw" onChange={handleChange} required/>
+                            <input className='form-control' type="password" id="pw" name="pw" onChange={handleChange} required />
                         </div>
 
                         <div className='form-group p-2'>
                             <label htmlFor="confirmpw">Confirmar contraseña:</label>
-                            <input className='form-control' type="password" id="confirmpw" name="confirmpw" onChange={handleChange} required/>
+                            <input className='form-control' type="password" id="confirmpw" name="confirmpw" onChange={handleChange} required />
                         </div>
 
                         <div>
@@ -93,19 +97,18 @@ export default function registerForm(req, res) {
                             </div>
 
                             <div className="form-check form-check-inline">
-                                <input className="form-check-input" type="radio" id="student" name="role" value="student" onChange={handleChange} required/>
+                                <input className="form-check-input" type="radio" id="student" name="role" value="student" onChange={handleChange} required />
                                 <label className="form-check-label" htmlFor="student">Estudiante</label>
                             </div>
 
                             <div className="form-check form-check-inline text-center">
-                                <input className="form-check-input" type="radio" id="teacher" name="role" value="teacher" onChange={handleChange} required/>
+                                <input className="form-check-input" type="radio" id="teacher" name="role" value="teacher" onChange={handleChange} required />
                                 <label className="form-check-label" htmlFor="teacher">Profesor(a)</label>
                             </div>
                         </div>
                         <div className='form-group p-2'>
                             <button className="btn btn-primary" type='submit'>Registrarse</button>
                         </div>
-           
                     </form>
                     <div className='form-group p-2'>
                         <a href="/" className={styles.bt}>

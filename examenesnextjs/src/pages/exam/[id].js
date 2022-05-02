@@ -1,4 +1,7 @@
 import { useRouter } from 'next/router'
+import Header from '../../components/Header'
+import styles from '../../styles/Home.module.css'
+import Head from 'next/head'
 
 var examID = null;
 
@@ -15,13 +18,31 @@ let handleChange = e => {
 export default function hand() {
     examID = useRouter().query.id
     return (
-        <form className='form  ' onSubmit={handleSubmit}>
-            <div className="card w-50 m-auto border-primary">
-                <label htmlFor="codeacc">Ingrese el código de acceso:</label>
-                <input type="text" id="codeacc" name="codeacc" onChange={handleChange} />
-                <button className="btn btn-primary" type='submit'> Validar </button>
-            </div>
-        </form>
+        <div className={styles.container}>
+            <Head>
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
+            <Header title="Question List"></Header>
+
+            <main className={styles.main}>
+
+                <form className='form  ' onSubmit={handleSubmit}>
+
+                    <label className={styles.description}>Ingrese el código de acceso: </label>
+                    <label>  &nbsp; </label>
+                    <input type="text" id="codeacc" name="codeacc" onChange={handleChange} />
+
+                    <div className='col text-center'>
+                        <button className="btn btn-primary btn-lg" type='submit'> Validar </button>
+                    </div>
+
+                </form>
+
+            </main>
+
+
+        </div>
+
     )
 }
 

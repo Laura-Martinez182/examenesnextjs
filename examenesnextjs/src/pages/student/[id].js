@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import Header from '../../components/Header'
-import Image from 'next/image'
 import styles from '../../styles/Home.module.css'
 import { useRouter } from 'next/router'
 
@@ -10,11 +9,21 @@ export default function examList({ names }) {
 
     return (
         <div className='w-50 m-auto mt-5'>
+            <Head>
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
             <Header title="Exams List"></Header>
-            <div>
-                <a>Código del estudiante: {useRouter().query.id}</a>
+            <div className={styles.row}>
+                <div>
+                    <a>Código del estudiante: {useRouter().query.id}</a>
+                </div>
+                <div className='form-group p-2'>
+                    <a href="/" className={styles.bt}>
+                        Cerrar sesión
+                    </a>
+                </div>
             </div>
-            <h1 className={styles.description}>Lista de exámenes</h1>
+            <h1 className={styles.subtitle}>Lista de exámenes</h1>
             <div class="row">
                 {names.map(e => (
                     <div class="col-sm-6">
@@ -40,5 +49,6 @@ export default function examList({ names }) {
 examList.getInitialProps = async () => {
     const res = await fetch('http://localhost:3000/api/regexams')
     const exam = await res.json()
+    const res2 = await fetch('http://localhost:3000/api/clearAnswers')
     return { names: exam }
 }

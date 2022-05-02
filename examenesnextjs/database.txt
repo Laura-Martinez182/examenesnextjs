@@ -1,20 +1,17 @@
 CREATE TABLE PERSON (
 	NAME VARCHAR(30),
     LASTNAME VARCHAR(30),
-    CODE VARCHAR(10),
+    CODE VARCHAR(20),
     PSSWORD VARCHAR(30),
     ROLE VARCHAR(20),
 	PRIMARY KEY(CODE)
-	
 );
-
-INSERT INTO PERSON VALUES('name','lastname','code', 'password','student');
 
 CREATE TABLE EXAM (
 	CODEID TEXT,
    	CODEACC TEXT,
-    TITLE VARCHAR (50),
-    DESCRIPTION VARCHAR (80),
+    TITLE TEXT,
+    DESCRIPTION TEXT,
 	PRIMARY KEY (CODEID)
 );
 
@@ -37,15 +34,7 @@ CREATE TABLE SELECTEDANSWERS (
 	ANSSELECTED TEXT,
     QUESTION TEXT,
 	PRIMARY KEY(QUESTION)
-	
 );
-
-INSERT INTO EXAM VALUES('123','123','Examen IntroTic', 'Examen parcial 1');
-INSERT INTO QUESTION VALUES('1','123','Seleccione la opcion correcta','20','a','b','c','d','c');
-INSERT INTO QUESTION VALUES('2','123','Seleccione la opcion correcta','20','a','b','c','d','c');
-INSERT INTO QUESTION VALUES('3','123','Seleccione la opcion correcta','20','a','b','c','d','c');
-INSERT INTO QUESTION VALUES('4','123','Seleccione la opcion correcta','20','a','b','c','d','c');
-INSERT INTO QUESTION VALUES('5','123','Seleccione la opcion correcta','20','a','b','c','d','c');
 
 INSERT INTO EXAM VALUES('12','12','Examen IntroTic', 'Examen parcial 2');
 INSERT INTO QUESTION VALUES('0-12','12','1Seleccione la opcion correcta','20','a1','b1','c1','d1','c');
@@ -53,3 +42,6 @@ INSERT INTO QUESTION VALUES('1-12','12','2Seleccione la opcion correcta','20','a
 INSERT INTO QUESTION VALUES('2-12','12','3Seleccione la opcion correcta','20','a3','b3','c3','d3','c');
 INSERT INTO QUESTION VALUES('3-12','12','4Seleccione la opcion correcta','20','a4','b4','c4','d4','c');
 INSERT INTO QUESTION VALUES('4-12','12','5Seleccione la opcion correcta','20','a5','b5','c5','d5','c');
+
+
+INSERT INTO PERSON VALUES('name','lastname','code', 'password','student');

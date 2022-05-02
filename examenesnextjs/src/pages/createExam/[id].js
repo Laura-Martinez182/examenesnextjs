@@ -1,6 +1,7 @@
 import Header from '../../components/Header'
 import styles from '../../styles/Home.module.css'
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 
 var questions = [];
 var teacher = "";
@@ -184,6 +185,9 @@ export default function createExam(req, res) {
     teacher = useRouter().query.id;
     return (
         <div className={styles.container}>
+            <Head>
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
             <Header title="Create exam"></Header>
             <main className={styles.main}>
                 <div className="card w-50 m-auto border-primary">
