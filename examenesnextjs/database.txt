@@ -33,6 +33,13 @@ CREATE TABLE QUESTION (
     FOREIGN KEY (EXAMID) REFERENCES EXAM(CODEID)
 );
 
+CREATE TABLE SELECTEDANSWERS (
+	ANSSELECTED TEXT,
+    QUESTION TEXT,
+	PRIMARY KEY(QUESTION)
+	
+);
+
 INSERT INTO EXAM VALUES('123','123','Examen IntroTic', 'Examen parcial 1');
 INSERT INTO QUESTION VALUES('1','123','Seleccione la opcion correcta','20','a','b','c','d','c');
 INSERT INTO QUESTION VALUES('2','123','Seleccione la opcion correcta','20','a','b','c','d','c');

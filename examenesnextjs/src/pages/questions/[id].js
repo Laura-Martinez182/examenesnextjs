@@ -48,14 +48,16 @@ let handleSubmit = async e => {
 
         
        
-        if(urlPage.split("-")[1]!="4"){
-            window.location.assign("http://localhost:3000/questions/"+urlPage.split("-")[0]+"-"+(parseInt(urlPage.split("-")[1])+1))
+        if(urlPage.split("-")[2]!="4"){
+            window.location.assign("http://localhost:3000/questions/"+urlPage.split("-")[0]+"-"+urlPage.split("-")[1]+"-"+(parseInt(urlPage.split("-")[2])+1))
         }else{
 
             let r = await fetch("http://localhost:3000/api/calculateGrade/"+urlPage)
             const result = await r.json()
 
             alert(`Nota: ${result.data}`)
+            window.location.assign("http://localhost:3000/student/"+urlPage.split("-")[0])
+       
         }
         
 
@@ -98,8 +100,8 @@ let handleSubmit1 = async e => {
 
         
        
-        if(urlPage.split("-")[1]!="0"){
-            window.location.assign("http://localhost:3000/questions/"+urlPage.split("-")[0]+"-"+(parseInt(urlPage.split("-")[1])-1))
+        if(urlPage.split("-")[2]!="0"){
+            window.location.assign("http://localhost:3000/questions/"+urlPage.split("-")[0]+"-"+urlPage.split("-")[1]+"-"+(parseInt(urlPage.split("-")[2])-1))
         }else{
             alert(`No se puede devolver`)
         }
@@ -133,7 +135,7 @@ export default  function questionsList({questions, examvalues, aS}) {
                 </div><br></br>
                 <div className="card w-50 m-auto border-primary" >
 
-                    <div className="card-header">{useRouter().query.id}</div>
+                    <div className="card-header">{examvalues.codeid}</div>
                     <div className="card-body">
                         <h5 className="card-title">{examvalues.title}</h5>
                         <p className="card-text">{examvalues.description}</p>
@@ -198,7 +200,7 @@ questionsList.getInitialProps = async (context) => {
     const res = await fetch("http://localhost:3000/api/questions/"+pageURL)
     const exam = await res.json()
 
-    const res2 = await fetch("http://localhost:3000/api/examid/"+pageURL.split("-")[0])
+    const res2 = await fetch("http://localhost:3000/api/examid/"+pageURL.split("-")[1])
     const exam2 = await res2.json()
 
     const res3 = await fetch("http://localhost:3000/api/selectedAnswer/"+pageURL)

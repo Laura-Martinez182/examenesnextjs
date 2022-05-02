@@ -19,8 +19,8 @@ export default async function handler(req, res) {
         console.log(req.query.id)
         console.log("eeeeeeee")
         //var questions = [];
-        var exid=req.query.id.split("-")[0]
-        var qid=req.query.id.split("-")[1]
+        var exid=req.query.id.split("-")[1]
+        var qid=req.query.id.split("-")[2]
         var question;
             try {
 

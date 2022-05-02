@@ -1,6 +1,11 @@
-import temp from '../../../util/temp'
+import db1 from '../../../util/database'
 
 export default async function handler(req,res){
+
+    let response = await db1.query('SELECT * FROM SELECTEDANSWERS')
+
+    let temp= response.rows
+
     const {method , body} = req;
         if (method === "POST"){
            
@@ -13,15 +18,14 @@ export default async function handler(req,res){
                     }
             }
             if(exit){
-                temp[index]={
-                    ansSelected: body.ansSel,
-                    question: req.query.id
-                }
+                
+                db1.query('UPDATE SELECTEDANSWERS SET ansselected=$1 WHERE question=$2',[body.ansSel,req.query.id])
+            
+
             }else{
-                temp.push({
-                    ansSelected: body.ansSel,
-                    question: req.query.id
-                })
+                db1.query('INSERT INTO SELECTEDANSWERS VALUES($1,$2)',[body.ansSel,req.query.id])
+            
+                
             }
             
 

@@ -20,7 +20,7 @@ export default function examList({ names }) {
         <div class="row">
             {names.map(e => (
                 <div class="col-sm-6">
-                    <a href={'http://localhost:3000/exam/'+e.codeid }>
+                    <a href={'http://localhost:3000/exam/'+useRouter().query.id+"-"+e.codeid }>
                         <div class="card bg-light mb-3 w-auto">
                             <div class="card text-center">
                                 <div class="card-header">{e.codeid}</div>

@@ -17,7 +17,7 @@ export default async function handler(req, res) {
 
         var exit = false
         for (var i = 0; i < db.length && !exit; i++) {
-            if (db[i].codeid===req.query.id && db[i].codeacc === body.accCode) {
+            if (db[i].codeid===req.query.id.split("-")[1] && db[i].codeacc === body.accCode) {
                 exit = true
             }
         }
@@ -27,7 +27,7 @@ export default async function handler(req, res) {
 
                 var questions = [];
                 for (var i = 0; i < dt.length; i++) {
-                    if (dt[i].examid ===  req.query.id) {
+                    if (dt[i].examid ===  req.query.id.split("-")[1]) {
                         questions[i] = dt[i]
                     }
                 }

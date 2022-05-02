@@ -1,7 +1,8 @@
-import temp from '../../../util/temp'
+import db1 from '../../../util/database'
 
 export default async function handler(req,res){
-   
+    let response = await db1.query('SELECT * FROM SELECTEDANSWERS')
+    let temp= response.rows
 
     const {method , body} = req;
 
