@@ -17,8 +17,8 @@ export default function examList({ names }) {
                 <div>
                     <a>Código del estudiante: {useRouter().query.id}</a>
                 </div>
-                <div className='form-group p-2'>
-                    <a href="/" className={styles.bt}>
+                <div className='form-group'>
+                    <a href="/" className={styles.a}>
                         Cerrar sesión
                     </a>
                 </div>

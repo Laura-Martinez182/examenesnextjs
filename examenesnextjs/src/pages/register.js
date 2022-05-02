@@ -106,13 +106,13 @@ export default function registerForm(req, res) {
                                 <label className="form-check-label" htmlFor="teacher">Profesor(a)</label>
                             </div>
                         </div>
-                        <div className='form-group p-2'>
+                        <div className='col text-center'>
                             <button className="btn btn-primary" type='submit'>Registrarse</button>
                         </div>
                     </form>
-                    <div className='form-group p-2'>
-                        <a href="/" className={styles.bt}>
-                            Volver
+                    <div className='col text-center p-3'>
+                        <a href="/" className={styles.a}>
+                            Cancelar
                         </a>
                     </div>
                 </div>

@@ -67,9 +67,9 @@ export default function login({ registrations }) {
                             <button className="btn btn-primary" type='submit'>Ingresar</button>
                         </div>
                     </form>
-                    <div className='col text-center mt-3'>
-                        <a href="/" className={styles.bt}>
-                            Volver
+                    <div className='col text-center p-3'>
+                        <a href="/" className={styles.a}>
+                            Cancelar
                         </a>
                     </div>
                 </div>
